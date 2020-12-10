@@ -26,6 +26,7 @@ jobs:
                       cp ./package.json /workspace/package.json
             - persist_to_workspace:
                   root: /workspace/
+                  path: workspace/release
             - store_artifacts:
                   path: ./dist/Installer.exe
     publish_to_github:
