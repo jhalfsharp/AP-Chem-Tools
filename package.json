@@ -5,7 +5,7 @@
 	"main": "main.js",
 	"scripts": {
 		"start": "electron .",
-		"dist": "electron-builder -w -p"
+		"dist": "electron-builder build -w --publish always"
 	},
 	"repository": "https://github.com/electron/electron-quick-start",
 	"keywords": [
@@ -25,6 +25,10 @@
 	"build": {
 		"win": {
 			"target": "nsis"
+		},
+		"nsis": {
+			"shortcutName": "Jimmy's Windows Wizard",
+			"artifactName": "Installer.${ext}"
 		}
 	}
 }
