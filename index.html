@@ -1,19 +1,159 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+	<head>
+		<meta charset="UTF-8" />
+		<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+		<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+		<link rel="stylesheet" href="libraries/bootstrap.min.css" />
+		<link rel="stylesheet" href="libraries/water.dark.min.css" />
+		<link rel="stylesheet" href="libraries/style.css" />
+		<script src="libraries/jquery.min.js"></script>
+		<script src="libraries/bootstrap.bundle.min.js"></script>
+		<script src="libraries/bootstrap.min.js"></script>
+		<title>oh yeah its real chem hours</title>
+	</head>
+	<body>
+		<h1>Jimmy's Chem Scripts</h1>
+		<hr />
+		<div id="IGL">
+			<h3>Ideal Gas Law</h3>
+			<form>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="IGL-P" placeholder="Pressure" />
+					</div>
+					<div class="col-4">
+						<select class="form-select" id="IGL-P-U">
+							<option value="torr">Torr / mm hg</option>
+							<option value="atm">Atmospheres</option>
+						</select>
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="IGL-V" placeholder="Volume" />
+					</div>
+					<div class="col-4">
+						<select class="form-select" id="IGL-V-U">
+							<option value="L">Liters</option>
+							<option value="mL">Milliliters</option>
+						</select>
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="IGL-n" placeholder="Moles" />
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="IGL-T" placeholder="Temperature" />
+					</div>
+					<div class="col-4">
+						<select class="form-select" id="IGL-T-U">
+							<option value="K">Kelvin</option>
+							<option value="C">Celsius</option>
+						</select>
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<button type="button" class="btn btn-primary btn-lg" id="IGL-btn" disabled="true">Calculate</button>
+					<button type="button" class="btn btn-danger btn-lg" id="IGL-clr">Clear</button>
+				</div>
+			</form>
+		</div>
+		<hr />
+		<div id="BL">
+			<h3>Beer's Law</h3>
+			<form>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="BL-A" placeholder="Absorbance" />
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="BL-e" placeholder="Molar Absorbtivity (L/mol-cm)" />
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="BL-B" placeholder="Length of Path of Light" />
+					</div>
+					<div class="col-4">
+						<select class="form-select" id="BL-B-U">
+							<option value="m">Meters</option>
+							<option value="cm">Centimeters</option>
+							<option value="mm">Millimeters</option>
+						</select>
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="BL-C" placeholder="Concentration" />
+					</div>
+					<div class="col-4">
+						<select class="form-select" id="BL-C-U">
+							<option value="M">Molar</option>
+							<option value="mM">Millimolar</option>
+							<option value="uM">Micromolar</option>
+						</select>
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<button type="button" class="btn btn-primary btn-lg" id="BL-btn" disabled="true">Calculate</button>
+					<button type="button" class="btn btn-danger btn-lg" id="BL-clr">Clear</button>
+				</div>
+			</form>
+		</div>
+		<hr />
+		<div id="TQ">
+			<h3>Trend Questions</h3>
+			<form>
+				<div class="row g-3 align-items-center">
+					<div class="col-3">
+						<input type="text" class="form-control" id="TQ-1" placeholder="Atom 1" />
+					</div>
+					<div class="col-3">
+						<input type="text" class="form-control" id="TQ-2" placeholder="Atom 2" />
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<textarea class="form-control" rows="10" readonly placeholder="Answer will appear here." id="TQ-A"></textarea>
+				</div>
+				<div class="row g-3 align-items-center">
+					<button type="button" class="btn btn-primary btn-lg" id="TQ-btn" disabled="true">Solve</button>
+					<button type="button" class="btn btn-danger btn-lg" id="TQ-clr">Clear</button>
+				</div>
+			</form>
+		</div>
+		<hr />
+		<div id="MM">
+			<h3>Molar Mass Calculator</h3>
+			<form>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="text" class="form-control" id="MM-in" placeholder="Compound" />
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input id="MM-out" readonly="true"></input>
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<button type="button" class="btn btn-primary btn-lg" id="MM-btn">Calculate</button>
+					<button type="button" class="btn btn-danger btn-lg" id="MM-clr">Clear</button>
+				</div>
+			</form>
+		</div>
+		<footer>
+			Using Node.js <span id="node-version"></span>, Chromium <span id="chrome-version"></span>, and Electron <span id="electron-version"></span>.
+		</footer>
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-  </body>
+		<!-- You can also require other files to run in this process -->
+		<script src="./PeriodicTable.js"></script>
+		<script src="./renderer.js"></script>
+	</body>
 </html>
