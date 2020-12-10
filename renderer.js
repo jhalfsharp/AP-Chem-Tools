@@ -19,8 +19,6 @@ var getElementFromString = (name) => {
 			output = val;
 			return;
 		}
-	});
-	PeriodicTable.forEach((val) => {
 		if (val.symbol.toLowerCase() == name.toLowerCase()) {
 			output = val;
 			return;
@@ -31,7 +29,6 @@ var getElementFromString = (name) => {
 console.log(getElementFromString('hydrogen').name);
 $('#IGL-P').change(() => {
 	pAssign = true;
-	pressure = parseFloat($('#IGL-P').val());
 	if ($('#IGL-P').val() == '') {
 		pAssign = false;
 	}
@@ -39,7 +36,6 @@ $('#IGL-P').change(() => {
 });
 $('#IGL-V').change(() => {
 	vAssign = true;
-	volume = parseFloat($('#IGL-V').val());
 	if ($('#IGL-V').val() == '') {
 		vAssign = false;
 	}
@@ -47,7 +43,6 @@ $('#IGL-V').change(() => {
 });
 $('#IGL-n').change(() => {
 	mAssign = true;
-	moles = parseFloat($('#IGL-n').val());
 	if ($('#IGL-n').val() == '') {
 		mAssign = false;
 	}
@@ -55,7 +50,6 @@ $('#IGL-n').change(() => {
 });
 $('#IGL-T').change(() => {
 	tAssign = true;
-	temperature = parseFloat($('#IGL-T').val());
 	if ($('#IGL-T').val() == '') {
 		tAssign = false;
 	}
@@ -71,6 +65,10 @@ $('#IGL-btn').click(() => {
 	pUnits = $('#IGL-P-U').val();
 	vUnits = $('#IGL-V-U').val();
 	tUnits = $('#IGL-T-U').val();
+	pressure = parseFloat($('#IGL-P').val());
+	volume = parseFloat($('#IGL-V').val());
+	moles = parseFloat($('#IGL-n').val());
+	temperature = parseFloat($('#IGL-T').val());
 	if (pUnits == 'atm') {
 		idealGasConstant = 0.08206;
 	} else {
@@ -134,7 +132,6 @@ var bUnits;
 var cUnits;
 $('#BL-A').change(() => {
 	aAssign = true;
-	absorbance = parseFloat($('#BL-A').val());
 	if ($('#BL-A').val() == '') {
 		aAssign = false;
 	}
@@ -142,7 +139,6 @@ $('#BL-A').change(() => {
 });
 $('#BL-e').change(() => {
 	eAssign = true;
-	molarAbsorbtivity = parseFloat($('#BL-e').val());
 	if ($('#BL-e').val() == '') {
 		eAssign = false;
 	}
@@ -150,7 +146,6 @@ $('#BL-e').change(() => {
 });
 $('#BL-B').change(() => {
 	bAssign = true;
-	pathLength = parseFloat($('#BL-B').val());
 	if ($('#BL-B').val() == '') {
 		bAssign = false;
 	}
@@ -158,7 +153,6 @@ $('#BL-B').change(() => {
 });
 $('#BL-C').change(() => {
 	cAssign = true;
-	concentration = parseFloat($('#BL-C').val());
 	if ($('#BL-C').val() == '') {
 		cAssign = false;
 	}
@@ -173,6 +167,10 @@ $('#BL-btn').click(() => {
 	console.log('button pressed');
 	bUnits = $('#BL-B-U').val();
 	cUnits = $('#BL-C-U').val();
+	absorbance = parseFloat($('#BL-A').val());
+	molarAbsorbtivity = parseFloat($('#BL-e').val());
+	pathLength = parseFloat($('#BL-B').val());
+	concentration = parseFloat($('#BL-C').val());
 	switch (bUnits) {
 		case 'm':
 			pathLength *= 100;
@@ -373,4 +371,102 @@ $('#MM-btn').click(() => {
 $('#MM-clr').click(() => {
 	$('#MM-in').val('');
 	$('#MM-out').val('');
+});
+var heat;
+var qAssign;
+var mass;
+var m2Assign;
+var specificHeat;
+var c2Assign;
+var deltaT;
+var dtAssign;
+var qUnits;
+var m2Units;
+$('#MCAT-q').change(() => {
+	qAssign = true;
+	if ($('#MCAT-q').val() == '') {
+		qAssign = false;
+	}
+	updateMCATButton();
+});
+$('#MCAT-m').change(() => {
+	m2Assign = true;
+	if ($('#MCAT-m').val() == '') {
+		m2Assign = false;
+	}
+	updateMCATButton();
+});
+$('#MCAT-c').change(() => {
+	c2Assign = true;
+	if ($('#MCAT-c').val() == '') {
+		c2Assign = false;
+	}
+	updateMCATButton();
+});
+$('#MCAT-t').change(() => {
+	dtAssign = true;
+	if ($('#MCAT-t').val() == '') {
+		dtAssign = false;
+	}
+	updateMCATButton();
+});
+var updateMCATButton = () => {
+	let values = [qAssign, m2Assign, c2Assign, dtAssign];
+	$('#MCAT-btn').prop('disabled', values.filter(Boolean).length !== 3);
+	console.log(values.filter(Boolean).length);
+};
+$('#MCAT-btn').click(() => {
+	console.log('button pressed');
+	qUnits = $('#MCAT-q-U').val();
+	m2Units = $('#MCAT-m-U').val();
+	heat = parseFloat($('#MCAT-q').val());
+	mass = parseFloat($('#MCAT-m').val());
+	specificHeat = parseFloat($('#MCAT-c').val());
+	deltaT = parseFloat($('#MCAT-t').val());
+	if (qUnits == 'kJ') {
+		heat *= 1000;
+	}
+	if (m2Units == 'kg') {
+		mass *= 1000;
+	}
+	if (!qAssign) {
+		heat = mass * specificHeat * deltaT;
+		if (qUnits == 'kJ') {
+			heat /= 1000;
+		}
+		$('#MCAT-q').val(heat);
+		$('#MCAT-btn').prop('disabled', true);
+		qAssign = true;
+	}
+	if (!m2Assign) {
+		mass = heat / (specificHeat * deltaT);
+		if (m2Units == 'kg') {
+			mass /= 1000;
+		}
+		$('#MCAT-m').val(mass);
+		$('#MCAT-btn').prop('disabled', true);
+		m2Assign = true;
+	}
+	if (!c2Assign) {
+		specificHeat = heat / (mass * deltaT);
+		$('#MCAT-c').val(specificHeat);
+		$('#MCAT-btn').prop('disabled', true);
+		c2Assign = true;
+	}
+	if (!dtAssign) {
+		deltaT = heat / (mass * specificHeat);
+		$('#MCAT-t').val(deltaT);
+		$('#MCAT-btn').prop('disabled', true);
+		dtAssign = true;
+	}
+});
+$('#MCAT-clr').click(() => {
+	qAssign = false;
+	m2Assign = false;
+	c2Assign = false;
+	dtAssign = false;
+	$('#MCAT-q').val('');
+	$('#MCAT-m').val('');
+	$('#MCAT-c').val('');
+	$('#MCAT-t').val('');
 });

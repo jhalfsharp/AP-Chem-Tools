@@ -136,15 +136,55 @@
 					<div class="col-8">
 						<input type="text" class="form-control" id="MM-in" placeholder="Compound" />
 					</div>
-				</div>
-				<div class="row g-3 align-items-center">
-					<div class="col-8">
+					<div class="col-4">
 						<input id="MM-out" readonly="true"></input>
 					</div>
 				</div>
 				<div class="row g-3 align-items-center">
 					<button type="button" class="btn btn-primary btn-lg" id="MM-btn">Calculate</button>
 					<button type="button" class="btn btn-danger btn-lg" id="MM-clr">Clear</button>
+				</div>
+			</form>
+		</div>
+		<hr />
+		<div id="MCAT">
+			<h3>"MCAT" equation</h3>
+			<form>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="MCAT-q" placeholder="Thermal Energy" />
+					</div>
+					<div class="col-4">
+						<select class="form-select" id="MCAT-q-U">
+							<option value="J">Joules</option>
+							<option value="kJ">Kilojoules</option>
+						</select>
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="MCAT-m" placeholder="Total Mass" />
+					</div>
+					<div class="col-4">
+						<select class="form-select" id="MCAT-m-U">
+							<option value="g">Grams</option>
+							<option value="kg">Kilograms</option>
+						</select>
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="MCAT-c" placeholder="Specific Heat (J/g-C)" />
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<div class="col-8">
+						<input type="number" class="form-control" id="MCAT-t" placeholder="Change in temperature" />
+					</div>
+				</div>
+				<div class="row g-3 align-items-center">
+					<button type="button" class="btn btn-primary btn-lg" id="MCAT-btn" disabled="true">Calculate</button>
+					<button type="button" class="btn btn-danger btn-lg" id="MCAT-clr">Clear</button>
 				</div>
 			</form>
 		</div>

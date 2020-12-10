@@ -1,6 +1,6 @@
 {
 	"name": "jimmys-chem-scripts",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "please save my grade",
 	"main": "main.js",
 	"scripts": {
