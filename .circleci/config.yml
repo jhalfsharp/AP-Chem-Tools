@@ -17,42 +17,9 @@ jobs:
                   name: Output file system
                   command: |
                       ls -l -f -R -a ./dist
-            - run:
-                  name: Store files to workspace
-                  command: |
-                      mkdir /workspace
-                      mkdir /workspace/release
-                      cp ./dist/Installer.exe /workspace/release/Installer.exe
-                      cp ./package.json /workspace/package.json
-            - persist_to_workspace:
-                  root: /workspace/
-                  path: workspace/release
             - store_artifacts:
                   path: ./dist/Installer.exe
-    publish_to_github:
-        docker:
-            - image: cibuilds/github:0.10
-        shell: /bin/sh -leo pipefail
-        environment:
-            - BASH_ENV: /etc/profile
-        steps:
-            - attach_workspace:
-                  at: /workspace
-            - run:
-                  name: Publish release to Github
-                  command: |
-                      VERSION=$(cat /workspace/package.json \
-                        | grep version \
-                        | head -1 \
-                        | awk -F: '{ print $2 }' \
-                        | sed 's/[",]//g') \
-                        | tr -d '[[:space:]]')
-                      ghr -t ${GH_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} /workspace/
-
 workflows:
     build:
         jobs:
             - build_windows
-            - publish_to_github:
-                  requires:
-                      - build_windows
