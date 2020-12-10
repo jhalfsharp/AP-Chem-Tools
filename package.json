@@ -7,14 +7,8 @@
 		"start": "electron .",
 		"dist": "electron-builder build -w --publish always"
 	},
-	"repository": "https://github.com/electron/electron-quick-start",
-	"keywords": [
-		"Electron",
-		"quick",
-		"start",
-		"tutorial",
-		"demo"
-	],
+	"repository": "https://github.com/jimbot6000/AP-Chem-Tools",
+	"keywords": [],
 	"author": "jimbot6000",
 	"license": "CC0-1.0",
 	"devDependencies": {
